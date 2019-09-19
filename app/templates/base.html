@@ -1,0 +1,15 @@
+<html>
+     <head>
+        {% if title %} 
+        <title>{{ title }} - Thunderdome</title>
+        {% else %}
+        <title>Welcome to the Thunderdome</title>
+        {% endif %}
+     </head>
+     <body>
+        <div>Thunderdome: <a href="/index">Home</a></div>
+        <hr>
+        {% block content %}{% endblock %}
+     </body>
+</html>
+
