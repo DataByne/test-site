@@ -6,4 +6,9 @@ venv/*
 # Compiled
 *.pyc
 
+# Private
+gmail.sh
+TEMP.py
 
+# Environment
+.env
