@@ -6,6 +6,15 @@ from blogsite.main.forms import PostForm
 from blogsite.models import Post, User
 from blogsite.main import bp
 
+
+@bp.before_app_request
+def before_request():
+    if current_user.is_authenticated:
+        current_user.last_seen = datetime.utcnow()
+        db.session.commit()
+    # g.locale = str(get_locale())
+
+
 @bp.route('/', methods=['GET', 'POST'])
 @bp.route('/index', methods=['GET', 'POST'])
 @login_required

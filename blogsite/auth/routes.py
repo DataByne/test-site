@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user
 from blogsite import db
-from blogsite.auth.forms import ResetPasswordForm, ResetPasswordRequestForm, LoginForm
+from blogsite.auth.forms import ResetPasswordForm, ResetPasswordRequestForm, LoginForm, RegistrationForm
 from blogsite.auth import bp
 from blogsite.auth.email import send_password_reset_email
 from blogsite.models import User
@@ -47,3 +47,21 @@ def reset_password(token):
         flash('Your password has been reset.')
         return redirect(url_for('auth.login'))
     return render_template('auth/reset_password.html', form=form)
+
+
+@bp.route('/register', methods=['GET', 'POST'])
+def register():
+    if current_user.is_authenticated:
+        return redirect(url_for( 'main.index' ))
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        user = User(username=form.username.data, email=form.email.data)
+        user.set_password(form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        # flash(_('Congratulations, you are now a registered user!'))
+        flash('Congratulations, you are now a registered user!')
+        return redirect(url_for('auth.login'))
+    # return render_template('auth/register.html', title=_('Register'),
+    return render_template('auth/register.html', title='Register',
+                           form=form)
