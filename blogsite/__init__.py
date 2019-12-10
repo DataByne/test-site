@@ -7,6 +7,7 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_bootstrap import Bootstrap
+from flask_babel import Babel, lazy_gettext as _l
 from config import BuildConfig
 
 db = SQLAlchemy()
@@ -14,6 +15,7 @@ migrate = Migrate()
 login = LoginManager()
 mail = Mail()
 bootstrap = Bootstrap()
+babel = Babel()
 
 def create_app( configClass = BuildConfig ):
 	app = Flask( __name__ )
@@ -24,6 +26,7 @@ def create_app( configClass = BuildConfig ):
 	login.init_app( app )
 	mail.init_app( app )
 	bootstrap.init_app( app )
+	babel.init_app( app )
 
 	# from blogsite.errors import bp as errors_bp
 	# app.register_blueprint( errors_bp )
@@ -56,6 +59,8 @@ def create_app( configClass = BuildConfig ):
 
 	return app
 	
-
+@babel.localeselector
+def get_locale():
+    return request.accept_languages.best_match(current_app.config['LANGUAGES'])
 
 from blogsite import models

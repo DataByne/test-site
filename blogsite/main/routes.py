@@ -1,6 +1,7 @@
 from datetime import datetime
 from flask import render_template, flash, redirect, url_for, request, g, jsonify, current_app
 from flask_login import current_user, login_required
+from flask_babel import _, get_locale
 from blogsite import db
 from blogsite.main.forms import PostForm
 from blogsite.models import Post, User
@@ -12,13 +13,24 @@ def before_request():
     if current_user.is_authenticated:
         current_user.last_seen = datetime.utcnow()
         db.session.commit()
-    # g.locale = str(get_locale())
+    g.locale = str(get_locale())
 
 
 @bp.route('/', methods=['GET', 'POST'])
 @bp.route('/index', methods=['GET', 'POST'])
-@login_required
+# @login_required
 def index():
+    if current_user.is_authenticated:
+        return user_home()
+    else:
+        return standard_home()
+
+def standard_home():
+    return render_template( 'index.html', title='Home' )
+
+
+@login_required
+def user_home():
     form = PostForm()
     if form.validate_on_submit():
         post = Post(body=form.post.data, author=current_user)
@@ -43,9 +55,10 @@ def index():
         if posts.has_next else None
     prev_url = url_for('main.index', page=posts.prev_num) \
         if posts.has_prev else None
-    return render_template('index.html', title='Home', form=form,
+    return render_template('user_index.html', title='Home', form=form,
                            page=page, posts=posts.items, next_url=next_url,
                            prev_url=prev_url)
+    
 
 
 @bp.route('/explore')

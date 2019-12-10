@@ -1,11 +1,7 @@
 {% extends 'bootstrap/base.html' %}
 
 {% block title %}
-      {% if title %} 
-      <title>{{ title }} - Thunderdome</title>
-      {% else %}
-      <title>Welcome to the Thunderdome</title>
-      {% endif %}
+      {% if title %}{{ title }} - Thunderdome{% else %}Welcome to the Thunderdome{% endif %}
 {% endblock %}      
 {% block navbar %}
 <nav class="navbar navbar-default">
@@ -22,19 +18,19 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
                   <!-- <li><a href="{{ url_for('main.index') }}">{{ _('Home') }}</a></li> -->
-                  <li><a href="{{ url_for('main.index') }}">{{ 'Home' }}</a></li>
+                  <li><a href="{{ url_for('main.index') }}">Home</a></li>
                   <!-- <li><a href="{{ url_for('main.explore') }}">{{ _('Explore') }}</a></li> -->
-                  <li><a href="{{ url_for('main.explore') }}">{{ 'Explore' }}</a></li>
+                  <li><a href="{{ url_for('main.explore') }}">Explore</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
                   {% if current_user.is_anonymous %}
                   <!-- <li><a href="{{ url_for('auth.login') }}">{{ _('Login') }}</a></li> -->
-                  <li><a href="{{ url_for('auth.login') }}">{{ 'Login' }}</a></li>
+                  <li><a href="{{ url_for('auth.login') }}">Login</a></li>
                   {% else %}
                   <!-- <li><a href="{{ url_for('main.user', username=current_user.username) }}">{{ _('Profile') }}</a></li> -->
-                  <li><a href="{{ url_for('main.user', username=current_user.username) }}">{{ 'Profile' }}</a></li>
+                  <li><a href="{{ url_for('main.user', username=current_user.username) }}">Profile</a></li>
                   <!-- <li><a href="{{ url_for('auth.logout') }}">{{ _('Logout') }}</a></li> -->
-                  <li><a href="{{ url_for('auth.logout') }}">{{ 'Logout' }}</a></li>
+                  <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
                   {% endif %}
               </ul>
           </div>

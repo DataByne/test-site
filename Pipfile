@@ -21,6 +21,7 @@ flask-sqlalchemy = "*"
 behave = "*"
 pylint = "*"
 splinter = "*"
+flask-babel = "*"
 
 [requires]
 python_version = "3.7"

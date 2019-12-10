@@ -1,14 +1,16 @@
-# Directories
-__pycache__/*
-venv/*
-.vscode/*
+# Development
+.vscode
+*.log*
 
 # Compiled
-*.pyc
+*.py[cod]
+__pycache__
 
 # Private
 gmail.sh
 TEMP.py
+app.db
 
 # Environment
 .env
+venv
