@@ -20,6 +20,7 @@ flask-bootstrap = "*"
 flask-sqlalchemy = "*"
 behave = "*"
 pylint = "*"
+splinter = "*"
 
 [requires]
 python_version = "3.7"

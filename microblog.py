@@ -1,5 +1,7 @@
-from site import app, db
-from site.models import User, Post
+from blogsite import create_app, db
+from blogsite.models import User, Post
+
+app = create_app()
 
 @app.shell_context_processor
 def make_shell_context():
