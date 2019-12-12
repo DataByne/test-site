@@ -22,6 +22,8 @@ behave = "*"
 pylint = "*"
 splinter = "*"
 flask-babel = "*"
+lxml = "*"
+cssselect = "*"
 
 [requires]
 python_version = "3.7"
